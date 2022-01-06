@@ -1,3 +1,14 @@
+// ==UserScript==
+// @name         Chimp
+// @namespace    http://tampermonkey.net/
+// @version      1
+// @description  this script plays the chimp test flawlessly
+// @author       VadimSchmitz
+// @match        https://humanbenchmark.com/tests/chimp
+// @icon         https://www.google.com/s2/favicons?domain=tampermonkey.net
+// @grant        none
+// ==/UserScript==
+
 const startButton = document.getElementsByClassName("css-de05nr e19owgy710")[0];
 startButton.addEventListener("click", (e) => {
   continueExecution = true;
