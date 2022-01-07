@@ -3,6 +3,7 @@
 
 ## Explanation of the game
 The goal of the game is to remember the sequence of the squares shown. after the first square is clicked all the other ones will become covered.
+
 ![game screen](https://cdn.discordapp.com/attachments/501427840873529364/928797007458471936/unknown.png)
 
 ## how to use the script
