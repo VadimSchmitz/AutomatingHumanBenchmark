@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-
 //simple delay function
 function delay(time) {
     return new Promise(function (resolve) {
@@ -21,16 +20,12 @@ function delay(time) {
     //check if there is a popup window for user agreement
     try {
         await page.waitForSelector('.Card-sc-1s2p2gv-0');
-        console.log('found button');
         await page.click('.Button__StyledButton-a1qza5-0.daCwey');
-        console.log('clicked button 1');
         //wait for scroll
         await delay(1000)
         await page.click('.Button__StyledButton-a1qza5-0.daCwey');
-        console.log('clicked button 2');
     }
     catch (e) {
-        console.log('no window found');
     }
     
     //text to type is assigned
