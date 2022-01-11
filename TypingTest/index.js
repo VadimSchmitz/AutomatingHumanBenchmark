@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 
+//simple delay function
 function delay(time) {
     return new Promise(function (resolve) {
         setTimeout(resolve, time)
@@ -13,11 +14,11 @@ function delay(time) {
         headless: false,
     });
 
+    //wait for page to load
     const page = await browser.newPage();
     await page.goto('https://humanbenchmark.com/tests/typing');
-    console.log('opened page');
 
-    //try except
+    //check if there is a popup window for user agreement
     try {
         await page.waitForSelector('.Card-sc-1s2p2gv-0');
         console.log('found button');
@@ -32,52 +33,17 @@ function delay(time) {
         console.log('no window found');
     }
     
-    //select letters notranslate
+    //text to type is assigned
     const text = await page.evaluate(() => document.querySelector('.letters.notranslate').innerText);
-    console.log(text);
 
+    //click on text field
     await page.click('.letters.notranslate');
     await delay(500)
+
+    //type text
     await page.keyboard.type(text);
     
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //wait 20 seconds to close the window
     await page.waitForTimeout(20000)
     await browser.close();
-    // page.waitForSelector('Button__StyledButton-a1qza5-0 daCwey')
-
-
-
-
-
-
-
-    //   await page.waitForSelector('Button__StyledButton-a1qza5-0 daCwey')
-    // console.log( page.waitForSelector('Button__StyledButton-a1qza5-0 daCwey'))
-    // await page.click('Button__StyledButton-a1qza5-0 daCwey');
-    // for (let i = 0; i < 20; i++) {
-    //     await page.keyboard.press('Enter');
-    //     delay(1000);
-    // }
-
-    // await page.click('Button__StyledButton-a1qza5-0 kffJJE');
-
-
-    // test = document.getElementsByClassName('')
-    // if (button) {
-    //     await button.click();
-
-    // console.log(document.getElementsByClassName('letters notranslate')[0].childNodes)
-    // console.log(document.getElementsByClassName('letters notranslate'))
 })();
