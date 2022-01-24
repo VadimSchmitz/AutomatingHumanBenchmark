@@ -3,7 +3,13 @@ let sequence = [];
 let listening = true;
 let sequenceNum = 1;
 
- function initField() {
+function delay(time) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, time)
+  });
+}
+
+function initField() {
   let squareRow = document.getElementsByClassName('squares')[0].childNodes;
   let squares = [];
 
@@ -27,33 +33,22 @@ let sequenceNum = 1;
     elementObserver.observe(element, config);
   });
 
-  clicking()
 }
 
 //settimeout for 1 second
 
-function clicking(){
-  console.log("reaching?")
-  console.log(sequence.length>sequenceNum)
-  while(sequence.length > sequenceNum){
-    console.log("listening")
-  }
-  setTimeout(() => {
-  }, 50);
-}
-
 function main() {
   console.log('run')
-  
+
   let mainscreen = document.getElementsByClassName('anim-slide-fade-in')[0];
   const config = { attributes: true, childList: true, subtree: true };
-  
+
   // Callback function to execute when mutations are observed
   const mainScreenCallback = function (mutationsList, mainScreenObserver) {
     initField()
     mainScreenObserver.disconnect();
   };
-  
+
   const mainScreenObserver = new MutationObserver(mainScreenCallback);
   mainScreenObserver.observe(mainscreen, config);
 }
@@ -65,3 +60,19 @@ window.addEventListener('load', function () {
 })
 
 
+  (async function loop() {
+    setTimeout(function () {
+      console.log(sequence.length)
+      if (sequence.length >= sequenceNum) {
+        sequenceNum++;
+        await delay(1000)
+        //click all the things in sequence
+        sequence.forEach(element => {
+          element.click();
+        });
+        sequence = [];
+      }
+
+      loop()
+    }, 50); // wait 50ms
+  }());
