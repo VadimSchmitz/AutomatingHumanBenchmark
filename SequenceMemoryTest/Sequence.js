@@ -59,20 +59,21 @@ window.addEventListener('load', function () {
   main()
 })
 
-
   (async function loop() {
-    setTimeout(function () {
+    setTimeout(async function () {
       console.log(sequence.length)
       if (sequence.length >= sequenceNum) {
         sequenceNum++;
         await delay(1000)
         //click all the things in sequence
         sequence.forEach(element => {
+          console.log(element)
           element.click();
+          console.log("clicks")
         });
         sequence = [];
       }
 
       loop()
-    }, 50); // wait 50ms
+    }, 500); // wait 50ms
   }());
